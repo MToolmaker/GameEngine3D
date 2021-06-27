@@ -1,3 +1,4 @@
+#define OLC_PGE_APPLICATION
 /*
 	olcPixelGameEngine.h
 
