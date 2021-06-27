@@ -16,6 +16,10 @@ struct mesh {
     std::vector<triangle> triangles;
 };
 
+struct point {
+    int w, h;
+};
+
 
 class olcEngine3D : public olc::PixelGameEngine {
 public:
@@ -28,22 +32,21 @@ private:
     // TODO: Check if anything can be moved to local variables
     constexpr static float myFieldOfView = 135.0f * 3.14f / 180.0f; // FOV in radians
     constexpr static float myFarthestDepth = 1000.0f;
-    constexpr static float myCameraDepth = 1.0f;
+    constexpr static float myCameraDepth = 0.00010f;
     float myAspectRation = 1.0f;
     std::vector<mesh> myMeshes;
     mat4x4 myProjectionMatrix;
     float myScalingFactor{};
 
-    static void TransformPoint(const vec3 &input, vec3 &output, const mat4x4& transformation) {
-        vec3 tmp = input;
-        output.x = tmp.x * transformation.elements[0 * 4 + 0] + tmp.y * transformation.elements[1 * 4 + 0] +
-                tmp.z * transformation.elements[2 * 4 + 0] + 1 * transformation.elements[3 * 4 + 0];
-        output.y = tmp.x * transformation.elements[0 * 4 + 1] + tmp.y * transformation.elements[1 * 4 + 1] +
-                tmp.z * transformation.elements[2 * 4 + 1] + 1 * transformation.elements[3 * 4 + 1];
-        output.z = tmp.x * transformation.elements[0 * 4 + 2] + tmp.y * transformation.elements[1 * 4 + 2] +
-                tmp.z * transformation.elements[2 * 4 + 2] + 1 * transformation.elements[3 * 4 + 2];
-        float w = tmp.x * transformation.elements[0 * 4 + 3] + tmp.y * transformation.elements[1 * 4 + 3] +
-                tmp.z * transformation.elements[2 * 4 + 3] + 1 * transformation.elements[3 * 4 + 3];
+    static void TransformPoint(const vec3 &input, vec3 &output, const mat4x4 &transformation) {
+        output.x = input.x * transformation.elements[0 * 4 + 0] + input.y * transformation.elements[1 * 4 + 0] +
+                   input.z * transformation.elements[2 * 4 + 0] + 1 * transformation.elements[3 * 4 + 0];
+        output.y = input.x * transformation.elements[0 * 4 + 1] + input.y * transformation.elements[1 * 4 + 1] +
+                   input.z * transformation.elements[2 * 4 + 1] + 1 * transformation.elements[3 * 4 + 1];
+        output.z = input.x * transformation.elements[0 * 4 + 2] + input.y * transformation.elements[1 * 4 + 2] +
+                   input.z * transformation.elements[2 * 4 + 2] + 1 * transformation.elements[3 * 4 + 2];
+        float w = input.x * transformation.elements[0 * 4 + 3] + input.y * transformation.elements[1 * 4 + 3] +
+                  input.z * transformation.elements[2 * 4 + 3] + 1 * transformation.elements[3 * 4 + 3];
         if (w == 0.0) return;
         output.x /= w;
         output.y /= w;
@@ -82,9 +85,8 @@ public:
 
         };
         myMeshes.push_back(myBox);
-        
-        
-        
+
+
         myAspectRation = (float) ScreenHeight() / (float) ScreenWidth();
         myScalingFactor = cos(myFieldOfView / 2.0f) / sin(myFieldOfView / 2.0f);
         myProjectionMatrix.elements[0 * 4 + 0] = myAspectRation * myScalingFactor;
@@ -98,7 +100,7 @@ public:
 
 
     float angle{};
-    
+
     bool OnUserUpdate(float fElapsedTime) override {
         FillRect(0, 0, ScreenWidth(), ScreenHeight(), olc::BLACK);
         // TODO: Extract common calculations with cos and sin
@@ -112,7 +114,7 @@ public:
         rotationMatrixZ.elements[1 * 4 + 1] = cosOfAngle;
         rotationMatrixZ.elements[2 * 4 + 2] = 1.0f;
         rotationMatrixZ.elements[3 * 4 + 3] = 1.0f;
-        
+
         mat4x4 rotationMatrixX;
         rotationMatrixX.elements[0 * 4 + 0] = 1.0f;
         rotationMatrixX.elements[1 * 4 + 1] = cosOfAngle;
@@ -120,39 +122,37 @@ public:
         rotationMatrixX.elements[2 * 4 + 1] = sinOfAngle;
         rotationMatrixX.elements[2 * 4 + 2] = cosOfAngle;
         rotationMatrixX.elements[3 * 4 + 3] = 1.0f;
-        
+
         vec3 projected{};
+        vec3 translated{};
+        vec3 rotatedX{};
+        vec3 rotatedXZ{};
         for (const auto &mesh : myMeshes) {
             for (const auto &tri : mesh.triangles) {
-                vec3 tmp = tri.p1;
-                TransformPoint(tmp, tmp, rotationMatrixX);
-                TransformPoint(tmp, tmp, rotationMatrixZ);
-                tmp.z += 3.0f;
-                TransformPoint(tmp, projected, myProjectionMatrix);
-                int p1x = (int)((projected.x + 1.0f) * 0.5f * (float)ScreenWidth());
-                int p1y = (int)((projected.y + 1.0f) * 0.5f * (float)ScreenHeight());
-
-                tmp = tri.p2;
-                TransformPoint(tmp, tmp, rotationMatrixX);
-                TransformPoint(tmp, tmp, rotationMatrixZ);
-                tmp.z += 3.0f;
-                TransformPoint(tmp, projected, myProjectionMatrix);
-                int p2x = (int)((projected.x + 1.0f) * 0.5f * (float)ScreenWidth());
-                int p2y = (int)((projected.y + 1.0f) * 0.5f * (float)ScreenHeight());
-
-                tmp = tri.p3;
-                TransformPoint(tmp, tmp, rotationMatrixX);
-                TransformPoint(tmp, tmp, rotationMatrixZ);
-                tmp.z += 3.0f;
-                TransformPoint(tmp, projected, myProjectionMatrix);
-                int p3x = (int)((projected.x + 1.0f) * 0.5f * (float)ScreenWidth());
-                int p3y = (int)((projected.y + 1.0f) * 0.5f * (float)ScreenHeight());
-
-                DrawTriangle(p1x, p1y, p2x, p2y, p3x, p3y, olc::WHITE);
+                point first = GetScreenPosition(rotationMatrixZ, rotationMatrixX, translated, tri, projected,
+                                                rotatedX, rotatedXZ, tri.p1);
+                point second = GetScreenPosition(rotationMatrixZ, rotationMatrixX, translated, tri, projected,
+                                                 rotatedX, rotatedXZ, tri.p2);
+                point third = GetScreenPosition(rotationMatrixZ, rotationMatrixX, translated, tri, projected,
+                                                rotatedX, rotatedXZ, tri.p3);
+                DrawTriangle(first.w, first.h, second.w, second.h, third.w, third.h, olc::WHITE);
             }
 
         }
         return true;
+    }
+
+    point GetScreenPosition(const mat4x4 &rotationMatrixZ, const mat4x4 &rotationMatrixX, vec3 &translated,
+                            const triangle &tri, vec3 &projected, vec3 &rotatedX, vec3 &rotatedXZ,
+                            const vec3 &worldPosition) const {
+        TransformPoint(worldPosition, rotatedX, rotationMatrixX);
+        TransformPoint(rotatedX, rotatedXZ, rotationMatrixZ);
+        translated = rotatedXZ;
+        translated.z += 3.0f;
+        TransformPoint(translated, projected, myProjectionMatrix);
+        float width = ((projected.x + 1.0f) * 0.5f * (float) ScreenWidth());
+        float height = ((projected.y + 1.0f) * 0.5f * (float) ScreenHeight());
+        return point{static_cast<int>(width), static_cast<int>(height)};
     }
 
 };
