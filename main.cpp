@@ -16,7 +16,7 @@ struct mesh {
     std::vector<triangle> triangles;
 };
 
-struct point {
+struct screenPosition {
     int w, h;
 };
 
@@ -25,32 +25,6 @@ class olcEngine3D : public olc::PixelGameEngine {
 public:
     olcEngine3D() {
         sAppName = "GameEngine3D";
-    }
-
-
-private:
-    // TODO: Check if anything can be moved to local variables
-    constexpr static float myFieldOfView = 135.0f * 3.14f / 180.0f; // FOV in radians
-    constexpr static float myFarthestDepth = 1000.0f;
-    constexpr static float myCameraDepth = 0.00010f;
-    float myAspectRation = 1.0f;
-    std::vector<mesh> myMeshes;
-    mat4x4 myProjectionMatrix;
-    float myScalingFactor{};
-
-    static void TransformPoint(const vec3 &input, vec3 &output, const mat4x4 &transformation) {
-        output.x = input.x * transformation.elements[0 * 4 + 0] + input.y * transformation.elements[1 * 4 + 0] +
-                   input.z * transformation.elements[2 * 4 + 0] + 1 * transformation.elements[3 * 4 + 0];
-        output.y = input.x * transformation.elements[0 * 4 + 1] + input.y * transformation.elements[1 * 4 + 1] +
-                   input.z * transformation.elements[2 * 4 + 1] + 1 * transformation.elements[3 * 4 + 1];
-        output.z = input.x * transformation.elements[0 * 4 + 2] + input.y * transformation.elements[1 * 4 + 2] +
-                   input.z * transformation.elements[2 * 4 + 2] + 1 * transformation.elements[3 * 4 + 2];
-        float w = input.x * transformation.elements[0 * 4 + 3] + input.y * transformation.elements[1 * 4 + 3] +
-                  input.z * transformation.elements[2 * 4 + 3] + 1 * transformation.elements[3 * 4 + 3];
-        if (w == 0.0) return;
-        output.x /= w;
-        output.y /= w;
-        output.z /= w;
     }
 
 public:
@@ -124,17 +98,20 @@ public:
         rotationMatrixX.elements[3 * 4 + 3] = 1.0f;
 
         vec3 projected{};
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedValue"
         vec3 translated{};
+#pragma clang diagnostic pop
         vec3 rotatedX{};
         vec3 rotatedXZ{};
         for (const auto &mesh : myMeshes) {
             for (const auto &tri : mesh.triangles) {
-                point first = GetScreenPosition(rotationMatrixZ, rotationMatrixX, translated, tri, projected,
-                                                rotatedX, rotatedXZ, tri.p1);
-                point second = GetScreenPosition(rotationMatrixZ, rotationMatrixX, translated, tri, projected,
-                                                 rotatedX, rotatedXZ, tri.p2);
-                point third = GetScreenPosition(rotationMatrixZ, rotationMatrixX, translated, tri, projected,
-                                                rotatedX, rotatedXZ, tri.p3);
+                RotateAndMovePoint(rotationMatrixZ, rotationMatrixX, tri, translated, rotatedX, rotatedXZ, tri.p1);
+                screenPosition first = ProjectPointOnScreen(translated, projected);
+                RotateAndMovePoint(rotationMatrixZ, rotationMatrixX, tri, translated, rotatedX, rotatedXZ, tri.p2);
+                screenPosition second = ProjectPointOnScreen(translated, projected);
+                RotateAndMovePoint(rotationMatrixZ, rotationMatrixX, tri, translated, rotatedX, rotatedXZ, tri.p3);
+                screenPosition third = ProjectPointOnScreen(translated, projected);
                 DrawTriangle(first.w, first.h, second.w, second.h, third.w, third.h, olc::WHITE);
             }
 
@@ -142,19 +119,45 @@ public:
         return true;
     }
 
-    point GetScreenPosition(const mat4x4 &rotationMatrixZ, const mat4x4 &rotationMatrixX, vec3 &translated,
-                            const triangle &tri, vec3 &projected, vec3 &rotatedX, vec3 &rotatedXZ,
-                            const vec3 &worldPosition) const {
-        TransformPoint(worldPosition, rotatedX, rotationMatrixX);
+    static void RotateAndMovePoint(const mat4x4 &rotationMatrixZ, const mat4x4 &rotationMatrixX, const triangle &tri,
+                                   vec3 &translated, vec3 &rotatedX, vec3 &rotatedXZ, const vec3 &input) {
+        TransformPoint(input, rotatedX, rotationMatrixX);
         TransformPoint(rotatedX, rotatedXZ, rotationMatrixZ);
         translated = rotatedXZ;
         translated.z += 3.0f;
+    }
+
+private:
+    // TODO: Check if anything can be moved to local variables
+    constexpr static float myFieldOfView = 135.0f * 3.14f / 180.0f; // FOV in radians
+    constexpr static float myFarthestDepth = 1000.0f;
+    constexpr static float myCameraDepth = 0.00010f;
+    float myAspectRation = 1.0f;
+    std::vector<mesh> myMeshes;
+    mat4x4 myProjectionMatrix;
+    float myScalingFactor{};
+
+    static void TransformPoint(const vec3 &input, vec3 &output, const mat4x4 &transformation) {
+        output.x = input.x * transformation.elements[0 * 4 + 0] + input.y * transformation.elements[1 * 4 + 0] +
+                   input.z * transformation.elements[2 * 4 + 0] + 1 * transformation.elements[3 * 4 + 0];
+        output.y = input.x * transformation.elements[0 * 4 + 1] + input.y * transformation.elements[1 * 4 + 1] +
+                   input.z * transformation.elements[2 * 4 + 1] + 1 * transformation.elements[3 * 4 + 1];
+        output.z = input.x * transformation.elements[0 * 4 + 2] + input.y * transformation.elements[1 * 4 + 2] +
+                   input.z * transformation.elements[2 * 4 + 2] + 1 * transformation.elements[3 * 4 + 2];
+        float w = input.x * transformation.elements[0 * 4 + 3] + input.y * transformation.elements[1 * 4 + 3] +
+                  input.z * transformation.elements[2 * 4 + 3] + 1 * transformation.elements[3 * 4 + 3];
+        if (w == 0.0) return;
+        output.x /= w;
+        output.y /= w;
+        output.z /= w;
+    }
+
+    screenPosition ProjectPointOnScreen(const vec3 &translated, vec3 &projected) const {
         TransformPoint(translated, projected, myProjectionMatrix);
         float width = ((projected.x + 1.0f) * 0.5f * (float) ScreenWidth());
         float height = ((projected.y + 1.0f) * 0.5f * (float) ScreenHeight());
-        return point{static_cast<int>(width), static_cast<int>(height)};
+        return screenPosition{static_cast<int>(width), static_cast<int>(height)};
     }
-
 };
 
 
