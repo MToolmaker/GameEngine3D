@@ -254,7 +254,7 @@ private:
 
 int main() {
     olcEngine3D demo;
-    if (demo.Construct(1920, 1080, 1, 1))
+    if (demo.Construct(1920, 1080, 1, 1) == olc::OK)
         demo.Start();
     return 0;
 }
