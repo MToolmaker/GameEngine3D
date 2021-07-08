@@ -181,7 +181,7 @@ public:
                                            normal.z * lightDirection.z;
                 float darkColor = 20.0f;
                 float lightMaxIntensityDelta = 170.0f;
-                int shadingIntensity = (int) (darkColor + alignmentWithLight * lightMaxIntensityDelta);
+                int shadingIntensity = (int) (darkColor + abs(alignmentWithLight) * lightMaxIntensityDelta);
                 auto color = olc::Pixel(shadingIntensity, shadingIntensity, shadingIntensity);
                 triangle transformedTriangle = {translated1, translated2, translated3, color};
                 trianglesToRaster.push_back(transformedTriangle);
