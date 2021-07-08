@@ -130,6 +130,14 @@ public:
         rotationMatrixX.elements[2 * 4 + 2] = cosOfAngle;
         rotationMatrixX.elements[3 * 4 + 3] = 1.0f;
 
+        mat4x4 rotationMatrixY;
+        rotationMatrixY.elements[0 * 4 + 0] = cosOfAngle;
+        rotationMatrixY.elements[0 * 4 + 2] = sinOfAngle;
+        rotationMatrixY.elements[1 * 4 + 1] = 1.0f;
+        rotationMatrixY.elements[2 * 4 + 0] = -sinOfAngle;
+        rotationMatrixY.elements[2 * 4 + 2] = cosOfAngle;
+        rotationMatrixY.elements[3 * 4 + 3] = 1.0f;
+
         vec3 projected{};
         vec3 translated{};
         vec3 rotatedX{};
