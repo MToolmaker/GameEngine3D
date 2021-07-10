@@ -66,12 +66,12 @@ public:
         cat.LoadFrom("cat.obj");
         myMeshes.push_back(cat);
         myAspectRation = (float) ScreenHeight() / (float) ScreenWidth();
-        myScalingFactor = cos(myFieldOfView / 2.0f) / sin(myFieldOfView / 2.0f);
+        myScalingFactor = cos(FieldOfView / 2.0f) / sin(FieldOfView / 2.0f);
         myProjectionMatrix.elements[0 * 4 + 0] = myAspectRation * myScalingFactor;
         myProjectionMatrix.elements[1 * 4 + 1] = myScalingFactor;
-        float viewableDepthDistance = myFarthestDepth - myCameraDepth;
-        myProjectionMatrix.elements[2 * 4 + 2] = myFarthestDepth / viewableDepthDistance;
-        myProjectionMatrix.elements[3 * 4 + 2] = -1.0f * myFarthestDepth * myCameraDepth / viewableDepthDistance;
+        float viewableDepthDistance = FarthestDepth - CameraDepth;
+        myProjectionMatrix.elements[2 * 4 + 2] = FarthestDepth / viewableDepthDistance;
+        myProjectionMatrix.elements[3 * 4 + 2] = -1.0f * FarthestDepth * CameraDepth / viewableDepthDistance;
         myProjectionMatrix.elements[2 * 4 + 3] = 1.0f;
         return true;
     }
@@ -181,10 +181,9 @@ public:
     }
 
 private:
-    // TODO: Check if anything can be moved to local variables
-    constexpr static float myFieldOfView = 135.0f * 3.14f / 180.0f; // FOV in radians
-    constexpr static float myFarthestDepth = 1000.0f;
-    constexpr static float myCameraDepth = 0.0001f;
+    constexpr static float FieldOfView = 135.0f * 3.14f / 180.0f; // FOV in radians
+    constexpr static float FarthestDepth = 1000.0f;
+    constexpr static float CameraDepth = 0.0001f;
     float myAspectRation = 1.0f;
     std::vector<mesh> myMeshes;
     mat4x4 myProjectionMatrix;
