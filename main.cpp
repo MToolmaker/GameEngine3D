@@ -62,9 +62,9 @@ public:
 
     bool OnUserCreate() override {
         // TODO: For future, check if orientation is right wise clock
-        mesh cargoShips;
-        cargoShips.LoadFrom("cat.obj");
-        myMeshes.push_back(cargoShips);
+        mesh cat;
+        cat.LoadFrom("cat.obj");
+        myMeshes.push_back(cat);
 
 
         myAspectRation = (float) ScreenHeight() / (float) ScreenWidth();
