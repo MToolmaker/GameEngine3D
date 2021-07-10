@@ -139,22 +139,16 @@ public:
         rotationMatrixY.elements[3 * 4 + 3] = 1.0f;
 
         vec3 projected{};
-        vec3 translated{};
         vec3 rotatedX{};
         vec3 rotatedXZ{};
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "UnusedValue"
         vec3 translated1{}, translated2{}, translated3{};
-#pragma clang diagnostic pop
         vec3 normal{}, line1{}, line2{};
-        for (const auto &mesh : myMeshes) {
+
+        for (const auto &mesh : myMeshes)
             for (const auto &tri : mesh.triangles) {
-                RotateAndMovePoint(rotationMatrixZ, rotationMatrixX, tri, translated, rotatedX, rotatedXZ, tri.p1);
-                translated1 = translated;
-                RotateAndMovePoint(rotationMatrixZ, rotationMatrixX, tri, translated, rotatedX, rotatedXZ, tri.p2);
-                translated2 = translated;
-                RotateAndMovePoint(rotationMatrixZ, rotationMatrixX, tri, translated, rotatedX, rotatedXZ, tri.p3);
-                translated3 = translated;
+                RotateAndMovePoint(rotationMatrixZ, rotationMatrixX, tri, translated1, rotatedX, rotatedXZ, tri.p1);
+                RotateAndMovePoint(rotationMatrixZ, rotationMatrixX, tri, translated2, rotatedX, rotatedXZ, tri.p2);
+                RotateAndMovePoint(rotationMatrixZ, rotationMatrixX, tri, translated3, rotatedX, rotatedXZ, tri.p3);
                 line1.x = translated2.x - translated1.x;
                 line1.y = translated2.y - translated1.y;
                 line1.z = translated2.z - translated1.z;
@@ -186,7 +180,6 @@ public:
                 triangle transformedTriangle = {translated1, translated2, translated3, color};
                 trianglesToRaster.push_back(transformedTriangle);
             }
-        }
 
         SortTrianglesByAverageZ();
 
