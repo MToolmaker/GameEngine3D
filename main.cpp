@@ -66,14 +66,21 @@ public:
     }
 
     bool OnUserCreate() override {
-        // TODO: For future, check if orientation is right wise clock
-        mesh cat;
-        cat.LoadFrom("cat.obj");
-        myMeshes.push_back(cat);
+        LoadMeshes();
+        SetupTransformationMatrices();
+        return true;
+    }
+
+    void SetupTransformationMatrices() {
         float aspectRatio = (float) ScreenHeight() / (float) ScreenWidth();
         myProjectionMatrix = CreateProjectionMatrix(FieldOfView, aspectRatio, CameraDepth, FarthestDepth);
         myTranslationMatrix = CreateTranslationMatrix(0.0f, 0.0f, 8.0f);
-        return true;
+    }
+
+    void LoadMeshes() {
+        mesh cat;
+        cat.LoadFrom("cat.obj");
+        myMeshes.push_back(cat);
     }
 
 
