@@ -124,10 +124,14 @@ public:
         for (const auto &tri : trianglesToRaster) {
             triangle projectedTriangle = ProjectTriangleToNormalizedSpace(myProjectionMatrix, tri);
             screenTriangle screenTriangle = TranslateProjectedTriangleToScreenSpace(projectedTriangle);
-            FillTriangle(screenTriangle.p1.w, screenTriangle.p1.h, screenTriangle.p2.w, screenTriangle.p2.h,
-                         screenTriangle.p3.w, screenTriangle.p3.h, tri.color);
+            DrawTriangle(tri, screenTriangle, tri.color);
         }
         trianglesToRaster.clear();
+    }
+
+    void DrawTriangle(const triangle &tri, const screenTriangle &screenTriangle, const olc::Pixel &color) {
+        FillTriangle(screenTriangle.p1.w, screenTriangle.p1.h, screenTriangle.p2.w, screenTriangle.p2.h,
+                     screenTriangle.p3.w, screenTriangle.p3.h, color);
     }
 
     static triangle ProjectTriangleToNormalizedSpace(const mat4x4 &projectionMatrix, const triangle &tri) {
