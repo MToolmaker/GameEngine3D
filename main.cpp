@@ -97,10 +97,6 @@ public:
         return matrix;
     }
 
-    constexpr static const float darkColor = 20.0f;
-    constexpr static const float lightMaxIntensityDelta = 170.0f;
-    constexpr static vec3 lightDirection = {0.0f, 0.0f, -1.0f};
-
     bool OnUserUpdate(float fElapsedTime) override {
         FillRect(0, 0, ScreenWidth(), ScreenHeight(), olc::BLACK);
         RotateAndTranslateTriangles(fElapsedTime);
@@ -150,8 +146,8 @@ public:
     }
 
     static olc::Pixel CalculateShading(const vec3 &normal) {
-        float alignmentWithLight = CalculateDotProduct(lightDirection, normal);
-        int shadingIntensity = (int) (darkColor + abs(alignmentWithLight) * lightMaxIntensityDelta);
+        float alignmentWithLight = CalculateDotProduct(LightDirection, normal);
+        int shadingIntensity = (int) (DarkColor + abs(alignmentWithLight) * LightMaxIntensityDelta);
         auto color = olc::Pixel(shadingIntensity, shadingIntensity, shadingIntensity);
         return color;
     }
@@ -183,6 +179,10 @@ private:
     constexpr static float FieldOfView = 135.0f; // FOV
     constexpr static float FarthestDepth = 1000.0f;
     constexpr static float CameraDepth = 0.001f;
+    constexpr static float DarkColor = 20.0f;
+    constexpr static float LightMaxIntensityDelta = 170.0f;
+    constexpr static vec3 LightDirection = {0.0f, 0.0f, -1.0f};
+    
     float myAngle{};
     std::vector<mesh> myMeshes;
     mat4x4 myProjectionMatrix;
