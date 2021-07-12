@@ -176,7 +176,7 @@ public:
     }
 
 private:
-    constexpr static float FieldOfView = 135.0f; // FOV
+    constexpr static float FieldOfView = 135.0f;
     constexpr static float FarthestDepth = 1000.0f;
     constexpr static float CameraDepth = 0.001f;
     constexpr static float DarkColor = 20.0f;
