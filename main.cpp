@@ -82,30 +82,33 @@ public:
 
                 // SOUTH
                 {0.0f, 0.0f, 0.0f + 5.3f, 1.0f, 0.0f, 1.0f, 0.0f + 5.3f, 1.0f, 1.0f, 1.0f, 0.0f + 5.3f},
-                {0.0f, 0.0f, 0.0f + 5.3f, 1.0f, 1.0f, 1.0f, 0.0f + 5.3f, 1.0f, 1.0f, 0.0f, 0.0f + 5.3f},
+//                {0.0f, 0.0f, 0.0f + 5.3f, 1.0f, 1.0f, 1.0f, 0.0f + 5.3f, 1.0f, 1.0f, 0.0f, 0.0f + 5.3f},
 
                 // EAST                                                      
-                {1.0f, 0.0f, 0.0f + 5.3f, 1.0f, 1.0f, 1.0f, 0.0f + 5.3f, 1.0f, 1.0f, 1.0f, 1.0f + 5.3f},
-                {1.0f, 0.0f, 0.0f + 5.3f, 1.0f, 1.0f, 1.0f, 1.0f + 5.3f, 1.0f, 1.0f, 0.0f, 1.0f + 5.3f},
+//                {1.0f, 0.0f, 0.0f + 5.3f, 1.0f, 1.0f, 1.0f, 0.0f + 5.3f, 1.0f, 1.0f, 1.0f, 1.0f + 5.3f},
+//                {1.0f, 0.0f, 0.0f + 5.3f, 1.0f, 1.0f, 1.0f, 1.0f + 5.3f, 1.0f, 1.0f, 0.0f, 1.0f + 5.3f},
 
                 // NORTH                                                     
-                {1.0f, 0.0f, 1.0f + 5.3f, 1.0f, 1.0f, 1.0f, 1.0f + 5.3f, 1.0f, 0.0f, 1.0f, 1.0f + 5.3f},
-                {1.0f, 0.0f, 1.0f + 5.3f, 1.0f, 0.0f, 1.0f, 1.0f + 5.3f, 1.0f, 0.0f, 0.0f, 1.0f + 5.3f},
+//                {1.0f, 0.0f, 1.0f + 5.3f, 1.0f, 1.0f, 1.0f, 1.0f + 5.3f, 1.0f, 0.0f, 1.0f, 1.0f + 5.3f},
+//                {1.0f, 0.0f, 1.0f + 5.3f, 1.0f, 0.0f, 1.0f, 1.0f + 5.3f, 1.0f, 0.0f, 0.0f, 1.0f + 5.3f},
 
                 // WEST                                                      
-                {0.0f, 0.0f, 1.0f + 5.3f, 1.0f, 0.0f, 1.0f, 1.0f + 5.3f, 1.0f, 0.0f, 1.0f, 0.0f + 5.3f},
-                {0.0f, 0.0f, 1.0f + 5.3f, 1.0f, 0.0f, 1.0f, 0.0f + 5.3f, 1.0f, 0.0f, 0.0f, 0.0f + 5.3f},
+//                {0.0f, 0.0f, 1.0f + 5.3f, 1.0f, 0.0f, 1.0f, 1.0f + 5.3f, 1.0f, 0.0f, 1.0f, 0.0f + 5.3f},
+//                {0.0f, 0.0f, 1.0f + 5.3f, 1.0f, 0.0f, 1.0f, 0.0f + 5.3f, 1.0f, 0.0f, 0.0f, 0.0f + 5.3f},
 
                 // TOP                                                       
-                {0.0f, 1.0f, 0.0f + 5.3f, 1.0f, 0.0f, 1.0f, 1.0f + 5.3f, 1.0f, 1.0f, 1.0f, 1.0f + 5.3f},
-                {0.0f, 1.0f, 0.0f + 5.3f, 1.0f, 1.0f, 1.0f, 1.0f + 5.3f, 1.0f, 1.0f, 1.0f, 0.0f + 5.3f},
+//                {0.0f, 1.0f, 0.0f + 5.3f, 1.0f, 0.0f, 1.0f, 1.0f + 5.3f, 1.0f, 1.0f, 1.0f, 1.0f + 5.3f},
+//                {0.0f, 1.0f, 0.0f + 5.3f, 1.0f, 1.0f, 1.0f, 1.0f + 5.3f, 1.0f, 1.0f, 1.0f, 0.0f + 5.3f},
 
                 // BOTTOM                                                    
-                {1.0f, 0.0f, 1.0f + 5.3f, 1.0f, 0.0f, 0.0f, 1.0f + 5.3f, 1.0f, 0.0f, 0.0f, 0.0f + 5.3f},
-                {1.0f, 0.0f, 1.0f + 5.3f, 1.0f, 0.0f, 0.0f, 0.0f + 5.3f, 1.0f, 1.0f, 0.0f, 0.0f + 5.3f},
+//                {1.0f, 0.0f, 1.0f + 5.3f, 1.0f, 0.0f, 0.0f, 1.0f + 5.3f, 1.0f, 0.0f, 0.0f, 0.0f + 5.3f},
+//                {1.0f, 0.0f, 1.0f + 5.3f, 1.0f, 0.0f, 0.0f, 0.0f + 5.3f, 1.0f, 1.0f, 0.0f, 0.0f + 5.3f},
 
         };
         myMeshes.push_back(myBox);
+//        mesh axis;
+//        axis.LoadFrom("axis.obj");
+//        myMeshes.push_back(axis);
     }
 
 
@@ -128,8 +131,11 @@ public:
         HandleCameraMoveAndShading(elapsedTime);
         SortTrianglesByAverageZ();
         DrawTriangles();
+
+
         return true;
     }
+
 
     void ProcessInput(float elapsedTime) {
         const vec3 velocityVector = Vector_Mul(myCameraDirection, 4.0f * elapsedTime);
@@ -138,20 +144,18 @@ public:
         if (GetKey(olc::A).bHeld) myCameraPosition.x -= 4.0f * elapsedTime;
         if (GetKey(olc::S).bHeld) myCameraPosition = Vector_Sub(myCameraPosition, velocityVector);
         if (GetKey(olc::D).bHeld) myCameraPosition.x += 4.0f * elapsedTime;
+        if (GetKey(olc::R).bHeld) myCameraPosition.y += 4.0f * elapsedTime;
+        if (GetKey(olc::F).bHeld) myCameraPosition.y -= 4.0f * elapsedTime;
         // TODO: Should I normalize camera direction vectors? Given it's rotation, it will be normalized anyway given we are starting at (0, 0, 1)
         if (GetKey(olc::Q).bHeld) {
-            const mat4x4 rotationAroundYMatrix = CreateRotationAroundYMatrix(1.0f * elapsedTime);
-            myCameraDirection = MultiplyVectorByMatrix(rotationAroundYMatrix, myCameraDirection);
-            fYaw += 1.0f * elapsedTime;
+            rotationAroundXZ += 1.0f * elapsedTime;
         }
         if (GetKey(olc::E).bHeld) {
-            const mat4x4 rotationAroundYMatrix = CreateRotationAroundYMatrix(-1.0f * elapsedTime);
-            myCameraDirection = NormaliseVector(MultiplyVectorByMatrix(rotationAroundYMatrix, myCameraDirection));
-            fYaw -= 1.0f * elapsedTime;
+            rotationAroundXZ -= 1.0f * elapsedTime;
         }
     }
 
-    mat4x4 Matrix_PointAt(const vec3 &pos, const vec3 &target, const vec3 &up) const {
+    static mat4x4 Matrix_PointAt(const vec3 &pos, const vec3 &target, const vec3 &up) {
         // Calculate new forward direction
         vec3 newForward = Vector_Sub(target, pos);
         newForward = NormaliseVector(newForward);
@@ -186,7 +190,7 @@ public:
 
     }
 
-    mat4x4 Matrix_QuickInverse(mat4x4 &m) const // Only for Rotation/Translation Matrices
+    static mat4x4 Matrix_QuickInverse(mat4x4 &m) // Only for Rotation/Translation Matrices
     {
         mat4x4 matrix;
         matrix.elements[0 * 4 + 0] = m.elements[0 * 4 + 0];
@@ -221,7 +225,29 @@ public:
         mat4x4 basisTranslation2 = CreateBasicTranslationMatrix2();
         for (const auto &mesh : myMeshes)
             for (const auto &tri : mesh.triangles) {
-                triangle translatedToCameraView = MultiplyTriangleByMatrix(basisTranslation2, tri);
+                float p1p2dist = Vector_Length(Vector_Sub(tri.p1, tri.p2));
+                float p2p3dist = Vector_Length(Vector_Sub(tri.p2, tri.p3));
+                float p1p3dist = Vector_Length(Vector_Sub(tri.p1, tri.p3));
+                triangle translatedToCameraView = MultiplyTriangleByMatrix(basisTranslation2,  tri);
+                float p1p2distTranslated = Vector_Length(Vector_Sub(translatedToCameraView.p1, translatedToCameraView.p2));
+                float p2p3distTranslated = Vector_Length(Vector_Sub(translatedToCameraView.p2, translatedToCameraView.p3));
+                float p1p3distTranslated = Vector_Length(Vector_Sub(translatedToCameraView.p1, translatedToCameraView.p3));
+                if (translatedToCameraView.p1.z < 5 || translatedToCameraView.p2.z < 5 || translatedToCameraView.p3.z < 5) {
+                    int j = 90;
+                    j++;
+                }
+                if (abs(p1p2dist - p1p2distTranslated) > 0.1) {
+                    int j = 90;
+                    j++;
+                }
+                if (abs(p2p3dist - p2p3distTranslated) > 0.1) {
+                    int j = 90;
+                    j++;
+                }
+                if (abs(p1p3dist - p1p3distTranslated) > 0.1) {
+                    int j = 90;
+                    j++;
+                }
                 vec3 normal = NormaliseVector(CalculateTriangleNormal(translatedToCameraView));
                 if (!IsTriangleLookingAtCamera(translatedToCameraView, normal, myCameraPosition)) continue;
                 olc::Pixel shading = CalculateShading(normal);
@@ -230,33 +256,34 @@ public:
             }
     }
 
-    float fYaw{};
+    float rotationAroundXZ{};
 
     [[nodiscard]] mat4x4 CreateBasicTranslationMatrix2() {
         // Create "Point At" Matrix for camera
         vec3 vUp = {0, 1, 0};
         vec3 vTarget = {0, 0, 1};
-        mat4x4 matCameraRot = CreateRotationAroundYMatrix(fYaw);
-        
+
+        mat4x4 matCameraRotXZ = CreateRotationAroundYMatrix(rotationAroundXZ);
+        myCameraDirection = NormaliseVector(MultiplyVectorByMatrix(matCameraRotXZ, vTarget));
         vTarget = Vector_Add(myCameraPosition, myCameraDirection);
         mat4x4 matCamera = Matrix_PointAt(myCameraPosition, vTarget, vUp);
 
         // Make view matrix from camera
         return Matrix_QuickInverse(matCamera);
     }
-    
-    [[nodiscard]] mat4x4 CreateBasicTranslationMatrix() {
+
+    [[nodiscard]] mat4x4  CreateBasicTranslationMatrix() {
         vec3 newDirectionZ = myCameraDirection;
         // TODO: Need to check that direction Y and forward vectors aren't too close otherwise cross product will be (0, 0, 0)
         vec3 tmp = NormaliseVector(CalculateCrossProduct(myDirectionY, newDirectionZ));
         // TODO: Check if order is correct
-        vec3 newDirectionY = NormaliseVector(CalculateCrossProduct(newDirectionZ, tmp));
+        vec3 newDirectionY = NormaliseVector(CalculateCrossProduct(tmp, newDirectionZ));
         vec3 newDirectionX = NormaliseVector(CalculateCrossProduct(newDirectionY, newDirectionZ));
-
+        
         mat4x4 basisTranslation{};
         basisTranslation.elements[0 * 4 + 0] = newDirectionX.x;
         basisTranslation.elements[1 * 4 + 0] = newDirectionX.y;
-        basisTranslation.elements[2 * 4 + 0] = newDirectionX.z;
+        basisTranslation.elements[2 * 4 + 0] = newDirectionX.z;  
         basisTranslation.elements[3 * 4 + 0] = -CalculateDotProduct(myCameraPosition, newDirectionX);
 
         basisTranslation.elements[0 * 4 + 1] = newDirectionY.x;
@@ -301,7 +328,7 @@ public:
     static olc::Pixel CalculateShading(const vec3 &normal) {
         float alignmentWithLight = CalculateDotProduct(LightDirection, normal);
         int shadingIntensity = (int) (DarkColor + abs(alignmentWithLight) * LightMaxIntensityDelta);
-        auto color = olc::Pixel(shadingIntensity, shadingIntensity, shadingIntensity);
+        auto color = olc::Pixel(0, 0, shadingIntensity);
         return color;
     }
 
@@ -331,15 +358,14 @@ public:
 private:
     constexpr static float FieldOfView = 135.0f;
     constexpr static float FarthestDepth = 1000.0f;
-    constexpr static float CameraDepth = 0.0001f;
-    constexpr static float DarkColor = 25.0f;
-    constexpr static float LightMaxIntensityDelta = 200.0f;
+    constexpr static float CameraDepth = 1.0f;
+    constexpr static float DarkColor = 170.0f;
+    constexpr static float LightMaxIntensityDelta = 50.0f;
     constexpr static vec3 LightDirection = {0.0f, 0.0f, -1.0f};
 
     float myAngle{};
     std::vector<mesh> myMeshes;
     mat4x4 myProjectionMatrix;
-    mat4x4 myTranslationMatrix;
 
     vec3 myCameraPosition{};
     vec3 myCameraDirection = {0, 0, 1};
